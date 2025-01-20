@@ -3,45 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Iframe Redirect Handler</title>
-  <style>
-    body {
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: #f0f0f0;
-    }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-  </style>
+  <title>About Blank Iframe Opener</title>
 </head>
 <body>
-  <!-- Fullscreen iframe -->
-  <iframe id="main-iframe" src="https://bearclubstudios.github.io/ser/index.html"></iframe>
+  <button onclick="openIframePage()">Open Iframe in New Tab</button>
 
   <script>
-    // Monitor for link clicks and redirect them to the iframe
-    document.addEventListener('click', function (event) {
-      const target = event.target;
+    function openIframePage() {
+      // Open a new blank tab
+      const newWindow = window.open('about:blank', '_blank');
 
-      // Check if the clicked element is a link
-      if (target.tagName === 'A' && target.href) {
-        event.preventDefault(); // Prevent the default link behavior
-        const iframe = document.getElementById('main-iframe');
-        iframe.src = target.href; // Load the link into the iframe
+      // Write HTML content into the new tab
+      if (newWindow) {
+        newWindow.document.write(`
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Iframe Viewer</title>
+            <style>
+              body {
+                margin: 0;
+                overflow: hidden;
+              }
+              iframe {
+                width: 100vw;
+                height: 100vh;
+                border: none;
+              }
+            </style>
+          </head>
+          <body>
+            <iframe src="https://github.com/BearClubStudios/rizz/tree/main"></iframe>
+          </body>
+          </html>
+        `);
+        newWindow.document.close();
+      } else {
+        alert('Failed to open new tab. Please allow popups for this website.');
       }
-    });
-
-    // Prevent links from opening new tabs or leaving the page
-    window.addEventListener('beforeunload', function (e) {
-      e.preventDefault();
-      e.returnValue = '';
-    });
+    }
   </script>
 </body>
 </html>
