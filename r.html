@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Auto Redirect with Iframe</title>
+  <title>Auto Redirect Iframe</title>
   <script>
-    // Automatically open a new tab with a fullscreen iframe
+    // Automatically redirect and open a new tab with the iframe
     window.onload = function () {
       const newWindow = window.open('about:blank', '_blank');
 
-      // Write HTML content into the new tab
       if (newWindow) {
         newWindow.document.write(`
           <!DOCTYPE html>
