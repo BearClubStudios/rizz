@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iframe Redirect Handler</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f0f0f0;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Fullscreen iframe -->
+  <iframe id="main-iframe" src="https://bearclubstudios.github.io/ser/index.html"></iframe>
+
+  <script>
+    // Monitor for link clicks and redirect them to the iframe
+    document.addEventListener('click', function (event) {
+      const target = event.target;
+
+      // Check if the clicked element is a link
+      if (target.tagName === 'A' && target.href) {
+        event.preventDefault(); // Prevent the default link behavior
+        const iframe = document.getElementById('main-iframe');
+        iframe.src = target.href; // Load the link into the iframe
+      }
+    });
+
+    // Prevent links from opening new tabs or leaving the page
+    window.addEventListener('beforeunload', function (e) {
+      e.preventDefault();
+      e.returnValue = '';
+    });
+  </script>
+</body>
+</html>
